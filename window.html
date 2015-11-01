@@ -1,8 +1,33 @@
-<!DOCTYPE html>
 <html>
-  <head>
-  </head>
-  <body>
-    <div>Hello, world!</div>
-  </body>
+<head>
+  <script src="strophe.min.js"></script>
+  <script src="jquery-2.1.4.min.js"></script>
+  <script src="app.js"></script>
+  <link rel="stylesheet" href="app.css" />
+</head>
+<body>
+  <div id="xmppDetails">
+    <p>xmpp details</p>
+    <div class="boshUrl">
+      <label>Server BOSH url</label>
+      <input type="text" id="boshUrl" />
+    </div>
+    <div class="userName">
+      <label>User name</label>
+      <input type="text" id="userName" />
+    </div>
+    <div class="password">
+      <label>Password</label>
+      <input type="password" id="password" />
+    </div>
+    <div>
+      <label for="xmmppDomain">Xmpp Domain</label>
+      <input type="text" id="xmppDomain" />
+    </div>
+    <button id="save">Save</button>
+  </div>
+
+
+
+</body>
 </html>

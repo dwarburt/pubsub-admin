@@ -1,0 +1,8 @@
+#xmppDetails label {
+  width: 100px;
+  display: inline-block;
+}
+#xmppDetails input[type="text"],
+#xmppDetails input[type="password"] {
+  width:300px;
+}

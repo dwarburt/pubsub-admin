@@ -19,9 +19,7 @@ function login() {
 }
 function discover() {
   conn.pubsub.connect(jid(), 'pubsub.' + domain());
-  //conn.pubsub.connect(jid(), domain());
   conn.pubsub.discoverNodes(gotNodes, logError, 1000);
-  conn.pubsub.subscribe('pubsub/nodes', [], onSubscriptionEvent, gotSubscription, logError);
 }
 function gotSubscription(params) {
   log("subscription to pubsub/nodes was successful");

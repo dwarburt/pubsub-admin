@@ -6,3 +6,17 @@
 #xmppDetails input[type="password"] {
   width:300px;
 }
+#xml, #msg {
+    font-family: monospace;
+    max-height: 300px;
+    overflow-y: scroll
+}
+#msg p.error {
+    color: #FF0000;
+}
+#xml p.in {
+    color: #FFA500;
+}
+#xml p.out {
+    color: #00FFFF;
+}

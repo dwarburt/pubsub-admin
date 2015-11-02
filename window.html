@@ -1,6 +1,7 @@
 <html>
 <head>
-  <script src="strophe.min.js"></script>
+  <script src="strophe.js"></script>
+  <script src="strophe.pubsub.js"></script>
   <script src="jquery-2.1.4.min.js"></script>
   <script src="app.js"></script>
   <link rel="stylesheet" href="app.css" />
@@ -24,7 +25,12 @@
       <label for="xmmppDomain">Xmpp Domain</label>
       <input type="text" id="xmppDomain" />
     </div>
-    <button id="save">Save</button>
+    <button id="save">Save / Logon</button>
+  </div>
+  <div id="msg">
+  </div>
+  <hr>
+  <div id="xml">
   </div>
 
 

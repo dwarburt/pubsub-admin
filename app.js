@@ -4,17 +4,38 @@ var Config = {
   userName: '',
   password: ''
 }
-function  jid() { return Config.userName + "@" + Config.xmppDomain; }
-
+var conn = null;
+function  jid()    { return Config.userName;   }
+function  domain() { return Config.xmppDomain; }
 function login() {
   for (k in Config) {
     Config[k] = $('#' + k).val();
   }
   chrome.storage.local.set(Config);
-  var conn = new Strophe.Connection(Config.boshUrl);
-  conn.raw_input = console.log;
-  conn.raw_output = console.log;
+  conn = new Strophe.Connection(Config.boshUrl);
+  conn.xmlInput = xmlIn;
+  conn.xmlOutput = xmlOut;
   conn.connect(jid(), Config.password, onStatus);
+}
+function discover() {
+//  conn.pubsub.connect(jid(), 'pubsub.' + domain());
+  conn.pubsub.connect(jid(), domain());
+  conn.pubsub.discoverNodes(gotNodes, logError, 1000);
+  conn.pubsub.subscribe('pubsub/nodes', [], onSubscriptionEvent, gotSubscription, logError);
+}
+function gotSubscription(params) {
+  log("subscription to pubsub/nodes was successful");
+}
+function onSubscriptionEvent(params) {
+  log("on subscription event: " + params);
+}
+function gotNodes(xml) {
+  var items = $(xml).children().children();
+  log(items.length + " items discovered.");
+  if (items.length < 20) { //arbitraty amount
+    var names = items.map(function(i) { return $(items[i]).attr('jid');}).toArray().join(' ');
+    log("Go these items: " + names);
+  }
 }
 
 function loadVals() {
@@ -35,14 +56,28 @@ $(function() {
 
 function onStatus(status) {
   if (status == Strophe.Status.CONNECTING) {
-    console.log('Connecting...');
+    log('Connecting...');
   } else if (status == Strophe.Status.CONNFAIL) {
-    console.log('Failed to connect!');
+    log('Failed to connect!');
   } else if (status == Strophe.Status.DISCONNECTING) {
-    console.log('Disconnecting...');
+    log('Disconnecting...');
   } else if (status == Strophe.Status.DISCONNECTED) {
-    console.log('Disconnected');    
+    log('Disconnected');    
   } else if (status == Strophe.Status.CONNECTED) {
-    console.log("Connected!");
+    log("Connected!");
+    discover();
   }
+}
+function log(msg) {
+  $('#msg').append($('<p>').text(msg));
+  console.log(msg);
+}
+function logError(x) {
+  $('#msg').append($('<p>').text(x.outerHTML).addClass('error'));
+}
+function xmlIn(x) {
+  $('#xml').append($('<p>').text(x.outerHTML).addClass('in'));
+}
+function xmlOut(x) {
+  $('#xml').append($('<p>').text(x.outerHTML).addClass('out'));
 }

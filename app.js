@@ -18,8 +18,8 @@ function login() {
   conn.connect(jid(), Config.password, onStatus);
 }
 function discover() {
-//  conn.pubsub.connect(jid(), 'pubsub.' + domain());
-  conn.pubsub.connect(jid(), domain());
+  conn.pubsub.connect(jid(), 'pubsub.' + domain());
+  //conn.pubsub.connect(jid(), domain());
   conn.pubsub.discoverNodes(gotNodes, logError, 1000);
   conn.pubsub.subscribe('pubsub/nodes', [], onSubscriptionEvent, gotSubscription, logError);
 }

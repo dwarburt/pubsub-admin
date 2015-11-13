@@ -19,9 +19,7 @@ function login() {
 }
 function discover() {
   conn.pubsub.connect(jid(), 'pubsub.' + domain());
-  //conn.pubsub.connect(jid(), domain());
   conn.pubsub.discoverNodes(gotNodes, logError, 1000);
-  conn.pubsub.subscribe('pubsub/nodes', [], onSubscriptionEvent, gotSubscription, logError);
 }
 function gotSubscription(params) {
   log("subscription to pubsub/nodes was successful");
@@ -33,7 +31,9 @@ function gotNodes(xml) {
   var items = $(xml).children().children();
   log(items.length + " items discovered.");
   if (items.length < 20) { //arbitraty amount
-    var names = items.map(function(i) { return $(items[i]).attr('jid');}).toArray().join(' ');
+    var names = items.map(function(i) {
+      return $(items[i]).attr('node');
+    }).toArray().join(' ');
     log("Go these items: " + names);
   }
 }
@@ -44,16 +44,27 @@ function loadVals() {
     for (k in Config) {
       $('#'+k).val(Config[k]);
     }
+    if (Config.password) {
+      $('#xmpp-details').hide();
+      login();
+    }
   });
 }
 
 $(function() {
+  setupTogglers();
   loadVals();
   $('#save').click(function() {
     login();
   });
 });
+function setupTogglers() {
+  $('a[toggle-for]').click(function() {
+    var deets = $(this).attr('toggle-for');
+    $(deets).toggle();
+  });
 
+}
 function onStatus(status) {
   if (status == Strophe.Status.CONNECTING) {
     log('Connecting...');

@@ -1,9 +1,9 @@
-#xmppDetails label {
+#xmpp-details label {
   width: 100px;
   display: inline-block;
 }
-#xmppDetails input[type="text"],
-#xmppDetails input[type="password"] {
+#xmpp-details input[type="text"],
+#xmpp-details input[type="password"] {
   width:300px;
 }
 #xml, #msg {
@@ -19,4 +19,10 @@
 }
 #xml p.out {
     color: #00FFFF;
+}
+#xml {
+    display: none;
+}
+#top-panel > div {
+    display: inline-block;
 }

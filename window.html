@@ -7,32 +7,48 @@
   <link rel="stylesheet" href="app.css" />
 </head>
 <body>
-  <div id="xmppDetails">
-    <p>xmpp details</p>
-    <div class="boshUrl">
-      <label>Server BOSH url</label>
-      <input type="text" id="boshUrl" />
-    </div>
-    <div class="userName">
-      <label>User name</label>
-      <input type="text" id="userName" />
-    </div>
-    <div class="password">
-      <label>Password</label>
-      <input type="password" id="password" />
+  <div id='top-panel'>
+    <div>
+      <p><a toggle-for="#xmpp-details" href="#">xmpp details</a></p>
+      <div id="xmpp-details">
+        <div class="boshUrl">
+          <label>Server BOSH url</label>
+          <input type="text" id="boshUrl" />
+        </div>
+        <div class="userName">
+          <label>User name</label>
+          <input type="text" id="userName" />
+        </div>
+        <div class="password">
+          <label>Password</label>
+          <input type="password" id="password" />
+        </div>
+        <div>
+          <label for="xmmppDomain">Xmpp Domain</label>
+          <input type="text" id="xmppDomain" />
+        </div>
+        <button id="save">Save / Logon</button>
+      </div>
     </div>
     <div>
-      <label for="xmmppDomain">Xmpp Domain</label>
-      <input type="text" id="xmppDomain" />
+      <p>Nodes</p>
+      <ul>
+        <li>one</li>
+        <li>two</li>
+      </ul>
+    </div>  
+  </div>
+  
+  <div>
+    <p><a toggle-for="#msg" href="#">message log</a></p>
+    <div id="msg">
+    </div>  
+  </div>
+  <div>
+    <p><a href="#" toggle-for="#xml">stanza log</a></p>
+    <div id="xml">
     </div>
-    <button id="save">Save / Logon</button>
   </div>
-  <div id="msg">
-  </div>
-  <hr>
-  <div id="xml">
-  </div>
-
 
 
 </body>
